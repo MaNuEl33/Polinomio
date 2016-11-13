@@ -27,29 +27,32 @@ public class Interfaz extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        radioPolinomio = new javax.swing.ButtonGroup();
         contenedor = new javax.swing.JPanel();
         polinomios = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        labelCoeficiente = new javax.swing.JLabel();
+        coeficiente = new javax.swing.JTextField();
+        labelExponente = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
+        insertarTermino = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jButton2 = new javax.swing.JButton();
+        areaPolinomios = new javax.swing.JTextArea();
+        verPolinomios = new javax.swing.JButton();
         operaciones = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        suma = new javax.swing.JButton();
+        resta = new javax.swing.JButton();
+        multiplicacion = new javax.swing.JButton();
+        division = new javax.swing.JButton();
+        evaluacion = new javax.swing.JButton();
+        derivacion = new javax.swing.JButton();
+        labelK = new javax.swing.JLabel();
+        k = new javax.swing.JTextField();
+        labelN = new javax.swing.JLabel();
+        n = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        areaResultado = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("TAD POLINOMIO P(x)");
@@ -63,10 +66,11 @@ public class Interfaz extends javax.swing.JFrame {
         polinomios.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Construcción de Polinomios P(x) y Q(x)", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Ubuntu", 1, 14))); // NOI18N
         polinomios.setName("polinomios"); // NOI18N
 
-        jLabel1.setText("Coeficiente:");
+        labelCoeficiente.setText("Coeficiente:");
 
-        jLabel2.setText("Exponente:");
+        labelExponente.setText("Exponente:");
 
+        radioPolinomio.add(jRadioButton1);
         jRadioButton1.setText("P(x)");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,18 +78,19 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
+        radioPolinomio.add(jRadioButton2);
         jRadioButton2.setText("Q(x)");
 
-        jButton1.setText("Insertar Termino");
+        insertarTermino.setText("Insertar Termino");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        areaPolinomios.setColumns(20);
+        areaPolinomios.setRows(5);
+        jScrollPane1.setViewportView(areaPolinomios);
 
-        jButton2.setText("Ver Polinomios");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        verPolinomios.setText("Ver Polinomios");
+        verPolinomios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                verPolinomiosActionPerformed(evt);
             }
         });
 
@@ -98,13 +103,13 @@ public class Interfaz extends javax.swing.JFrame {
                     .addGroup(polinomiosLayout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addGroup(polinomiosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
+                            .addComponent(labelCoeficiente)
                             .addGroup(polinomiosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jRadioButton1)
-                                .addComponent(jLabel2)))
+                                .addComponent(labelExponente)))
                         .addGap(18, 18, 18)
                         .addGroup(polinomiosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
+                            .addComponent(coeficiente, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
                             .addComponent(jTextField2)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, polinomiosLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -115,9 +120,9 @@ public class Interfaz extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(polinomiosLayout.createSequentialGroup()
                 .addGap(69, 69, 69)
-                .addComponent(jButton1)
+                .addComponent(insertarTermino)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(verPolinomios)
                 .addGap(181, 181, 181))
         );
         polinomiosLayout.setVerticalGroup(
@@ -127,11 +132,11 @@ public class Interfaz extends javax.swing.JFrame {
                 .addGroup(polinomiosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(polinomiosLayout.createSequentialGroup()
                         .addGroup(polinomiosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(labelCoeficiente)
+                            .addComponent(coeficiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(polinomiosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
+                            .addComponent(labelExponente)
                             .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(21, 21, 21)
                         .addGroup(polinomiosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -140,87 +145,97 @@ public class Interfaz extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(polinomiosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(insertarTermino)
+                    .addComponent(verPolinomios))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
         operaciones.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Operaciones", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Ubuntu", 1, 14))); // NOI18N
         operaciones.setName("operaciones"); // NOI18N
 
-        jButton3.setText("Suma: P(x) +Q(x)");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        suma.setText("Suma: P(x) +Q(x)");
+        suma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                sumaActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Resta: P(x) - Q(x)");
+        resta.setText("Resta: P(x) - Q(x)");
 
-        jButton5.setText("Multiplicación: P(x) * k");
+        multiplicacion.setText("Multiplicación: P(x) * Q(x)");
 
-        jButton6.setText("División: P(x) / k");
+        division.setText("División: P(x) / Q(x)");
 
-        jButton7.setText("Evaluar P(x) en n");
+        evaluacion.setText("Evaluar P(x) en n");
 
-        jButton8.setText("Derivar P(x)");
+        derivacion.setText("Derivar P(x)");
 
-        jLabel3.setText("Ingrese k:");
+        labelK.setText("Ingrese k:");
 
-        jLabel4.setText("Ingrese n:");
+        labelN.setText("Ingrese n:");
+
+        areaResultado.setColumns(20);
+        areaResultado.setRows(5);
+        jScrollPane2.setViewportView(areaResultado);
 
         javax.swing.GroupLayout operacionesLayout = new javax.swing.GroupLayout(operaciones);
         operaciones.setLayout(operacionesLayout);
         operacionesLayout.setHorizontalGroup(
             operacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(operacionesLayout.createSequentialGroup()
-                .addGap(73, 73, 73)
                 .addGroup(operacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(operacionesLayout.createSequentialGroup()
+                        .addGap(73, 73, 73)
                         .addGroup(operacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton3)
-                            .addComponent(jButton6))
+                            .addComponent(suma)
+                            .addComponent(division)))
+                    .addGroup(operacionesLayout.createSequentialGroup()
+                        .addGap(100, 100, 100)
+                        .addGroup(operacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(k, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelK)
+                            .addComponent(labelN)
+                            .addComponent(n, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(operacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(operacionesLayout.createSequentialGroup()
                         .addGap(81, 81, 81)
                         .addGroup(operacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton4)
-                            .addComponent(jButton7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
+                            .addComponent(resta)
+                            .addComponent(evaluacion))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                         .addGroup(operacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton5)
-                            .addComponent(jButton8))
+                            .addComponent(multiplicacion)
+                            .addComponent(derivacion))
                         .addGap(82, 82, 82))
                     .addGroup(operacionesLayout.createSequentialGroup()
-                        .addGroup(operacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(operacionesLayout.createSequentialGroup()
-                        .addGroup(operacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField4))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(31, 31, 31)
+                        .addComponent(jScrollPane2)
+                        .addContainerGap())))
         );
         operacionesLayout.setVerticalGroup(
             operacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(operacionesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(operacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5))
+                    .addComponent(suma)
+                    .addComponent(resta)
+                    .addComponent(multiplicacion))
                 .addGap(24, 24, 24)
                 .addGroup(operacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton6)
-                    .addComponent(jButton7)
-                    .addComponent(jButton8))
+                    .addComponent(division)
+                    .addComponent(evaluacion)
+                    .addComponent(derivacion))
                 .addGap(29, 29, 29)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(operacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(operacionesLayout.createSequentialGroup()
+                        .addComponent(labelK)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(k, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(labelN)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(n, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
@@ -228,11 +243,12 @@ public class Interfaz extends javax.swing.JFrame {
         contenedor.setLayout(contenedorLayout);
         contenedorLayout.setHorizontalGroup(
             contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(contenedorLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contenedorLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(polinomios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(operaciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(polinomios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addComponent(operaciones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         contenedorLayout.setVerticalGroup(
             contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -262,13 +278,13 @@ public class Interfaz extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void verPolinomiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verPolinomiosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_verPolinomiosActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void sumaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sumaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_sumaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -306,28 +322,31 @@ public class Interfaz extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea areaPolinomios;
+    private javax.swing.JTextArea areaResultado;
+    private javax.swing.JTextField coeficiente;
     private javax.swing.JPanel contenedor;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JButton derivacion;
+    private javax.swing.JButton division;
+    private javax.swing.JButton evaluacion;
+    private javax.swing.JButton insertarTermino;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField k;
+    private javax.swing.JLabel labelCoeficiente;
+    private javax.swing.JLabel labelExponente;
+    private javax.swing.JLabel labelK;
+    private javax.swing.JLabel labelN;
+    private javax.swing.JButton multiplicacion;
+    private javax.swing.JTextField n;
     private javax.swing.JPanel operaciones;
     private javax.swing.JPanel polinomios;
+    private javax.swing.ButtonGroup radioPolinomio;
+    private javax.swing.JButton resta;
+    private javax.swing.JButton suma;
+    private javax.swing.JButton verPolinomios;
     // End of variables declaration//GEN-END:variables
 }
