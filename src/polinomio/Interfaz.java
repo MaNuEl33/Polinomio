@@ -33,9 +33,9 @@ public class Interfaz extends javax.swing.JFrame {
         labelCoeficiente = new javax.swing.JLabel();
         coeficiente = new javax.swing.JTextField();
         labelExponente = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        exponente = new javax.swing.JTextField();
+        px = new javax.swing.JRadioButton();
+        qx = new javax.swing.JRadioButton();
         insertarTermino = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         areaPolinomios = new javax.swing.JTextArea();
@@ -56,7 +56,6 @@ public class Interfaz extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("TAD POLINOMIO P(x)");
-        setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
         setSize(new java.awt.Dimension(800, 600));
 
@@ -70,18 +69,24 @@ public class Interfaz extends javax.swing.JFrame {
 
         labelExponente.setText("Exponente:");
 
-        radioPolinomio.add(jRadioButton1);
-        jRadioButton1.setText("P(x)");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        radioPolinomio.add(px);
+        px.setSelected(true);
+        px.setText("P(x)");
+        px.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                pxActionPerformed(evt);
             }
         });
 
-        radioPolinomio.add(jRadioButton2);
-        jRadioButton2.setText("Q(x)");
+        radioPolinomio.add(qx);
+        qx.setText("Q(x)");
 
         insertarTermino.setText("Insertar Termino");
+        insertarTermino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                insertarTerminoActionPerformed(evt);
+            }
+        });
 
         areaPolinomios.setColumns(20);
         areaPolinomios.setRows(5);
@@ -105,15 +110,15 @@ public class Interfaz extends javax.swing.JFrame {
                         .addGroup(polinomiosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelCoeficiente)
                             .addGroup(polinomiosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jRadioButton1)
+                                .addComponent(px)
                                 .addComponent(labelExponente)))
                         .addGap(18, 18, 18)
                         .addGroup(polinomiosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(coeficiente, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
-                            .addComponent(jTextField2)))
+                            .addComponent(exponente)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, polinomiosLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jRadioButton2)
+                        .addComponent(qx)
                         .addGap(33, 33, 33)))
                 .addGap(38, 38, 38)
                 .addComponent(jScrollPane1)
@@ -137,11 +142,11 @@ public class Interfaz extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(polinomiosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(labelExponente)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(exponente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(21, 21, 21)
                         .addGroup(polinomiosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButton1)
-                            .addComponent(jRadioButton2)))
+                            .addComponent(px)
+                            .addComponent(qx)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(polinomiosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -161,6 +166,11 @@ public class Interfaz extends javax.swing.JFrame {
         });
 
         resta.setText("Resta: P(x) - Q(x)");
+        resta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                restaActionPerformed(evt);
+            }
+        });
 
         multiplicacion.setText("Multiplicación: P(x) * Q(x)");
 
@@ -274,52 +284,59 @@ public class Interfaz extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void pxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_pxActionPerformed
 
     private void verPolinomiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verPolinomiosActionPerformed
-        // TODO add your handling code here:
+        
+        String polinomios = "P(x) = ";
+        polinomios += Polinomio.p.mostrarPolinomio() + "\n";
+        polinomios += "Q(x) = ";
+        polinomios += Polinomio.q.mostrarPolinomio() + "\n";
+        
+        areaPolinomios.setText(polinomios);
+        
     }//GEN-LAST:event_verPolinomiosActionPerformed
 
     private void sumaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sumaActionPerformed
         // TODO add your handling code here:
+         Polinomio.s = Lista.unir(Polinomio.p, Polinomio.q); // Creamos un polinomio con la suma de ambos
+         
+         Polinomio.sum = Lista.simplifica(Polinomio.s); // Simpflicamos el polinomio obtenido
+         
+         areaResultado.setText(Polinomio.sum.mostrarPolinomio()); // Mostramos el polinomio
+        
     }//GEN-LAST:event_sumaActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+    private void insertarTerminoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertarTerminoActionPerformed
+        
+        if(!coeficiente.getText().equals("") && !exponente.getText().equals("")) { // Si tienen datos los camposs
+            
+            int c = Integer.parseInt(coeficiente.getText()); // Convertimos el texto del JTextField a entero
+            int e = Integer.parseInt(exponente.getText()); // Convertimos el texto del JTextField a entero
+           
+            if(px.isSelected()) { // Si P(x) esta seleccionada
+                
+                Polinomio.p.insertarTermino(new Termino(c, e));
+            
+            } else { // Si Q(x) esta seleccionada
+                Polinomio.q.insertarTermino(new Termino(c, e));
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
+    }//GEN-LAST:event_insertarTerminoActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Interfaz().setVisible(true);
-            }
-        });
-    }
+    private void restaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restaActionPerformed
+        // TODO add your handling code here:
+        
+        Polinomio.qNeg = Lista.negativo(Polinomio.q); // Negativo del polinomio q
+        
+        Polinomio.r = Lista.unir(Polinomio.p, Polinomio.qNeg); // Creamos un polinomio con la suma de ambos P(x) + -Q(x) = P(x) - Q(x)
+        
+        Polinomio.res = Lista.simplifica(Polinomio.r); // Simplificamos el polinomio
+        
+        areaResultado.setText(Polinomio.res.mostrarPolinomio()); // Mostramos el polinomio
+    }//GEN-LAST:event_restaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea areaPolinomios;
@@ -329,12 +346,10 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JButton derivacion;
     private javax.swing.JButton division;
     private javax.swing.JButton evaluacion;
+    private javax.swing.JTextField exponente;
     private javax.swing.JButton insertarTermino;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField k;
     private javax.swing.JLabel labelCoeficiente;
     private javax.swing.JLabel labelExponente;
@@ -344,9 +359,12 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JTextField n;
     private javax.swing.JPanel operaciones;
     private javax.swing.JPanel polinomios;
+    private javax.swing.JRadioButton px;
+    private javax.swing.JRadioButton qx;
     private javax.swing.ButtonGroup radioPolinomio;
     private javax.swing.JButton resta;
     private javax.swing.JButton suma;
     private javax.swing.JButton verPolinomios;
     // End of variables declaration//GEN-END:variables
+
 }

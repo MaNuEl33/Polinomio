@@ -5,6 +5,10 @@ public class Nodo {
     private Termino dato;
     
     private Nodo siguiente;
+    
+    public Nodo() {
+        
+    }
 
     public Nodo(Termino dato) {
         this.dato = dato;
