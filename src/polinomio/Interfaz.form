@@ -262,10 +262,8 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="k" min="-2" pref="67" max="-2" attributes="0"/>
-                                  <Component id="labelK" min="-2" max="-2" attributes="0"/>
                                   <Component id="labelN" min="-2" max="-2" attributes="0"/>
-                                  <Component id="n" alignment="0" min="-2" pref="68" max="-2" attributes="0"/>
+                                  <Component id="nField" alignment="0" min="-2" pref="68" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -283,9 +281,15 @@
                               </Group>
                               <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                              <Component id="jScrollPane2" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="labelResultado" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Component id="jScrollPane2" max="32767" attributes="0"/>
+                              </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -307,20 +311,22 @@
                           <Component id="evaluacion" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="derivacion" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="labelK" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="k" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
                               <Component id="labelN" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="n" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="nField" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
-                          <Component id="jScrollPane2" max="32767" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace pref="30" max="32767" attributes="0"/>
+                              <Component id="labelResultado" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace pref="23" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -356,25 +362,24 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Evaluar P(x) en n"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="evaluacionActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="derivacion">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Derivar P(x)"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="labelK">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Ingrese k:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="k">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="derivacionActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="labelN">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Ingrese n:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="n">
+            <Component class="javax.swing.JTextField" name="nField">
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane2">
               <AuxValues>
@@ -391,6 +396,11 @@
                 </Component>
               </SubComponents>
             </Container>
+            <Component class="javax.swing.JLabel" name="labelResultado">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Resultado:"/>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
       </SubComponents>

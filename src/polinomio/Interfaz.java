@@ -47,12 +47,11 @@ public class Interfaz extends javax.swing.JFrame {
         division = new javax.swing.JButton();
         evaluacion = new javax.swing.JButton();
         derivacion = new javax.swing.JButton();
-        labelK = new javax.swing.JLabel();
-        k = new javax.swing.JTextField();
         labelN = new javax.swing.JLabel();
-        n = new javax.swing.JTextField();
+        nField = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         areaResultado = new javax.swing.JTextArea();
+        labelResultado = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("TAD POLINOMIO P(x)");
@@ -177,16 +176,26 @@ public class Interfaz extends javax.swing.JFrame {
         division.setText("División: P(x) / Q(x)");
 
         evaluacion.setText("Evaluar P(x) en n");
+        evaluacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                evaluacionActionPerformed(evt);
+            }
+        });
 
         derivacion.setText("Derivar P(x)");
-
-        labelK.setText("Ingrese k:");
+        derivacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                derivacionActionPerformed(evt);
+            }
+        });
 
         labelN.setText("Ingrese n:");
 
         areaResultado.setColumns(20);
         areaResultado.setRows(5);
         jScrollPane2.setViewportView(areaResultado);
+
+        labelResultado.setText("Resultado:");
 
         javax.swing.GroupLayout operacionesLayout = new javax.swing.GroupLayout(operaciones);
         operaciones.setLayout(operacionesLayout);
@@ -202,10 +211,8 @@ public class Interfaz extends javax.swing.JFrame {
                     .addGroup(operacionesLayout.createSequentialGroup()
                         .addGap(100, 100, 100)
                         .addGroup(operacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(k, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelK)
                             .addComponent(labelN)
-                            .addComponent(n, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(nField, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGroup(operacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(operacionesLayout.createSequentialGroup()
                         .addGap(81, 81, 81)
@@ -219,7 +226,11 @@ public class Interfaz extends javax.swing.JFrame {
                         .addGap(82, 82, 82))
                     .addGroup(operacionesLayout.createSequentialGroup()
                         .addGap(31, 31, 31)
-                        .addComponent(jScrollPane2)
+                        .addGroup(operacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(operacionesLayout.createSequentialGroup()
+                                .addComponent(labelResultado)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jScrollPane2))
                         .addContainerGap())))
         );
         operacionesLayout.setVerticalGroup(
@@ -235,18 +246,19 @@ public class Interfaz extends javax.swing.JFrame {
                     .addComponent(division)
                     .addComponent(evaluacion)
                     .addComponent(derivacion))
-                .addGap(29, 29, 29)
-                .addGroup(operacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(operacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(operacionesLayout.createSequentialGroup()
-                        .addComponent(labelK)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(k, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(51, 51, 51)
                         .addComponent(labelN)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(n, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2))
-                .addContainerGap(23, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(nField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, operacionesLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                        .addComponent(labelResultado)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
 
         javax.swing.GroupLayout contenedorLayout = new javax.swing.GroupLayout(contenedor);
@@ -290,22 +302,27 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void verPolinomiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verPolinomiosActionPerformed
         
-        String polinomios = "P(x) = ";
-        polinomios += Polinomio.p.mostrarPolinomio() + "\n";
-        polinomios += "Q(x) = ";
-        polinomios += Polinomio.q.mostrarPolinomio() + "\n";
+        // La cadena polinomios contendra una cadena que contiene ambos polinomios
         
-        areaPolinomios.setText(polinomios);
+        String polinomios = "P(x) = "; // Polinomio P(x)
+        polinomios += p.mostrarPolinomio() + "\n";
+        polinomios += "Q(x) = "; // Polinomio Q(x)
+        polinomios += q.mostrarPolinomio() + "\n";
+        
+        areaPolinomios.setText(polinomios); // Mostramos los polinomios en la caja de texto
         
     }//GEN-LAST:event_verPolinomiosActionPerformed
 
     private void sumaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sumaActionPerformed
         // TODO add your handling code here:
-         Polinomio.s = Lista.unir(Polinomio.p, Polinomio.q); // Creamos un polinomio con la suma de ambos
+        
+        // Si exisste el polinomio p y el polinomio q
+        if((p.getPrimero()!= null) && (q.getPrimero() != null)) {
+            
+            Polinomio sum = Polinomio.suma(p, q);
          
-         Polinomio.sum = Lista.simplifica(Polinomio.s); // Simpflicamos el polinomio obtenido
-         
-         areaResultado.setText(Polinomio.sum.mostrarPolinomio()); // Mostramos el polinomio
+            areaResultado.setText(sum.mostrarPolinomio()); // Mostramos el polinomio
+        } 
         
     }//GEN-LAST:event_sumaActionPerformed
 
@@ -318,10 +335,10 @@ public class Interfaz extends javax.swing.JFrame {
            
             if(px.isSelected()) { // Si P(x) esta seleccionada
                 
-                Polinomio.p.insertarTermino(new Termino(c, e));
+                p.insertarTermino(new Termino(c, e));
             
             } else { // Si Q(x) esta seleccionada
-                Polinomio.q.insertarTermino(new Termino(c, e));
+                q.insertarTermino(new Termino(c, e));
             }
         }
     }//GEN-LAST:event_insertarTerminoActionPerformed
@@ -329,15 +346,71 @@ public class Interfaz extends javax.swing.JFrame {
     private void restaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restaActionPerformed
         // TODO add your handling code here:
         
-        Polinomio.qNeg = Lista.negativo(Polinomio.q); // Negativo del polinomio q
+        // Si existe el polinomio p y el polinomio q
+        if((p.getPrimero() != null) && (q.getPrimero() != null)) {
+            
+            Polinomio res = Polinomio.resta(p, q);
         
-        Polinomio.r = Lista.unir(Polinomio.p, Polinomio.qNeg); // Creamos un polinomio con la suma de ambos P(x) + -Q(x) = P(x) - Q(x)
-        
-        Polinomio.res = Lista.simplifica(Polinomio.r); // Simplificamos el polinomio
-        
-        areaResultado.setText(Polinomio.res.mostrarPolinomio()); // Mostramos el polinomio
+            areaResultado.setText(res.mostrarPolinomio()); // Mostramos el polinomio
+        }
     }//GEN-LAST:event_restaActionPerformed
 
+    private void evaluacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_evaluacionActionPerformed
+        // TODO add your handling code here:
+        
+        // Si el campo de texto tiene algun valor y existe el polinomio p
+        if((!nField.getText().equals("")) && p.getPrimero() != null) {
+            int n = Integer.parseInt(nField.getText()); // Obtenemos el entero de la caja de texto
+            
+            areaResultado.setText(Integer.toString(p.evalua(n))); // Mostramos el resultado
+        }
+    }//GEN-LAST:event_evaluacionActionPerformed
+
+    private void derivacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_derivacionActionPerformed
+        // TODO add your handling code here:
+        
+        if(p.getPrimero() != null) { // Si existe el polinomio p
+            Polinomio der;
+            
+            der = Polinomio.derivar(p);
+            
+            areaResultado.setText(der.mostrarPolinomio()); // Mostramos el resultado
+        }
+    }//GEN-LAST:event_derivacionActionPerformed
+
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Interfaz().setVisible(true);
+            }
+        });
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea areaPolinomios;
     private javax.swing.JTextArea areaResultado;
@@ -350,13 +423,12 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JButton insertarTermino;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField k;
     private javax.swing.JLabel labelCoeficiente;
     private javax.swing.JLabel labelExponente;
-    private javax.swing.JLabel labelK;
     private javax.swing.JLabel labelN;
+    private javax.swing.JLabel labelResultado;
     private javax.swing.JButton multiplicacion;
-    private javax.swing.JTextField n;
+    private javax.swing.JTextField nField;
     private javax.swing.JPanel operaciones;
     private javax.swing.JPanel polinomios;
     private javax.swing.JRadioButton px;
@@ -367,4 +439,6 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JButton verPolinomios;
     // End of variables declaration//GEN-END:variables
 
+    Polinomio p = new Polinomio(); // Polinomio P(x)
+    Polinomio q = new Polinomio(); // Polinomio Q(x)
 }
