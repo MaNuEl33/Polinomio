@@ -122,7 +122,7 @@
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" pref="459" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -130,7 +130,9 @@
                       <Component id="insertarTermino" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="verPolinomios" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="181" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
+                      <Component id="borrarTodo" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -161,6 +163,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="insertarTermino" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="verPolinomios" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="borrarTodo" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="31" max="32767" attributes="0"/>
                   </Group>
@@ -231,6 +234,14 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="verPolinomiosActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="borrarTodo">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Vaciar Polinomios"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="borrarTodoActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -352,11 +363,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Multiplicaci&#xf3;n: P(x) * Q(x)"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="multiplicacionActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="division">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Divisi&#xf3;n: P(x) / Q(x)"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="divisionActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="evaluacion">
               <Properties>

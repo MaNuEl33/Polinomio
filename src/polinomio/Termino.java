@@ -2,23 +2,23 @@ package polinomio;
 
 public class Termino {
     
-    private int coeficiente;
+    private float coeficiente;
     private int exponente;
     
     public Termino(){
         
     }
 
-    public Termino(int coeficiente, int exponente) {
+    public Termino(float coeficiente, int exponente) {
         this.coeficiente = coeficiente;
         this.exponente = exponente;
     }
 
-    public int getCoeficiente() {
+    public float getCoeficiente() {
         return coeficiente;
     }
 
-    public void setCoeficiente(int coeficiente) {
+    public void setCoeficiente(float coeficiente) {
         this.coeficiente = coeficiente;
     }
 

@@ -40,6 +40,7 @@ public class Interfaz extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         areaPolinomios = new javax.swing.JTextArea();
         verPolinomios = new javax.swing.JButton();
+        borrarTodo = new javax.swing.JButton();
         operaciones = new javax.swing.JPanel();
         suma = new javax.swing.JButton();
         resta = new javax.swing.JButton();
@@ -98,6 +99,13 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
+        borrarTodo.setText("Vaciar Polinomios");
+        borrarTodo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                borrarTodoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout polinomiosLayout = new javax.swing.GroupLayout(polinomios);
         polinomios.setLayout(polinomiosLayout);
         polinomiosLayout.setHorizontalGroup(
@@ -120,14 +128,16 @@ public class Interfaz extends javax.swing.JFrame {
                         .addComponent(qx)
                         .addGap(33, 33, 33)))
                 .addGap(38, 38, 38)
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 459, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(polinomiosLayout.createSequentialGroup()
                 .addGap(69, 69, 69)
                 .addComponent(insertarTermino)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(verPolinomios)
-                .addGap(181, 181, 181))
+                .addGap(73, 73, 73)
+                .addComponent(borrarTodo)
+                .addGap(82, 82, 82))
         );
         polinomiosLayout.setVerticalGroup(
             polinomiosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,7 +160,8 @@ public class Interfaz extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(polinomiosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(insertarTermino)
-                    .addComponent(verPolinomios))
+                    .addComponent(verPolinomios)
+                    .addComponent(borrarTodo))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
@@ -172,8 +183,18 @@ public class Interfaz extends javax.swing.JFrame {
         });
 
         multiplicacion.setText("Multiplicación: P(x) * Q(x)");
+        multiplicacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                multiplicacionActionPerformed(evt);
+            }
+        });
 
         division.setText("División: P(x) / Q(x)");
+        division.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                divisionActionPerformed(evt);
+            }
+        });
 
         evaluacion.setText("Evaluar P(x) en n");
         evaluacion.addActionListener(new java.awt.event.ActionListener() {
@@ -316,12 +337,12 @@ public class Interfaz extends javax.swing.JFrame {
     private void sumaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sumaActionPerformed
         // TODO add your handling code here:
         
-        // Si exisste el polinomio p y el polinomio q
+        // Si existe el polinomio p y el polinomio q
         if((p.getPrimero()!= null) && (q.getPrimero() != null)) {
             
             Polinomio sum = Polinomio.suma(p, q);
          
-            areaResultado.setText(sum.mostrarPolinomio()); // Mostramos el polinomio
+            areaResultado.setText("P(x) + Q(x) = " + sum.mostrarPolinomio()); // Mostramos el polinomio
         } 
         
     }//GEN-LAST:event_sumaActionPerformed
@@ -351,7 +372,7 @@ public class Interfaz extends javax.swing.JFrame {
             
             Polinomio res = Polinomio.resta(p, q);
         
-            areaResultado.setText(res.mostrarPolinomio()); // Mostramos el polinomio
+            areaResultado.setText("P(x) - Q(x) = " + res.mostrarPolinomio()); // Mostramos el polinomio
         }
     }//GEN-LAST:event_restaActionPerformed
 
@@ -362,7 +383,7 @@ public class Interfaz extends javax.swing.JFrame {
         if((!nField.getText().equals("")) && p.getPrimero() != null) {
             int n = Integer.parseInt(nField.getText()); // Obtenemos el entero de la caja de texto
             
-            areaResultado.setText(Integer.toString(p.evalua(n))); // Mostramos el resultado
+            areaResultado.setText("P(" + nField.getText() + ") = " + Integer.toString(p.evalua(n))); // Mostramos el resultado
         }
     }//GEN-LAST:event_evaluacionActionPerformed
 
@@ -374,9 +395,64 @@ public class Interfaz extends javax.swing.JFrame {
             
             der = Polinomio.derivar(p);
             
-            areaResultado.setText(der.mostrarPolinomio()); // Mostramos el resultado
+            areaResultado.setText("P'(x) = " + der.mostrarPolinomio()); // Mostramos el resultado
         }
     }//GEN-LAST:event_derivacionActionPerformed
+
+    private void multiplicacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiplicacionActionPerformed
+        // TODO add your handling code here:
+        
+        // Si existe el polinomio p y el polinomio q
+        if(p.getPrimero() != null && q.getPrimero()!= null) {
+            
+            Polinomio mul;
+            
+            mul = Polinomio.multiplicacion(p, q);
+            
+            areaResultado.setText("P(x) * Q(x) = " + mul.mostrarPolinomio());
+        }
+    }//GEN-LAST:event_multiplicacionActionPerformed
+
+    private void divisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_divisionActionPerformed
+        // TODO add your handling code here:
+        
+        // Si existe el polinomio p y el polinomio q
+        if(p.getPrimero() != null && q.getPrimero() != null) {
+            // Si el grado del polinomio p es mayor igual que el grado del polinomio q
+            if(p.getPrimero().getDato().getExponente() >= q.getPrimero().getDato().getExponente()) {
+                Polinomio div;
+                
+                div = Polinomio.division(p, q);
+                
+                areaResultado.setText("P(x) / Q(x) = " + div.mostrarPolinomio());
+            } else {
+                
+                String error = "No se puede realizar la operación: "
+                        + "\nEl grado del polinomio P debe ser mayor que el polinomio Q.";
+                areaResultado.setText(error);
+            }
+        }
+    }//GEN-LAST:event_divisionActionPerformed
+
+    private void borrarTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarTodoActionPerformed
+        // TODO add your handling code here:
+        
+        // Reiniciamos los polinomios p y q
+        p = new Polinomio();
+        q = new Polinomio();
+        
+        
+        // Vaciamos las cajas de texto
+        coeficiente.setText("");
+        exponente.setText("");
+        nField.setText("");
+        
+        areaPolinomios.setText("");
+        areaResultado.setText("");
+        
+        // Dejamos seleccionado por defecto P(x)
+        px.setSelected(true);
+    }//GEN-LAST:event_borrarTodoActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -414,6 +490,7 @@ public class Interfaz extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea areaPolinomios;
     private javax.swing.JTextArea areaResultado;
+    private javax.swing.JButton borrarTodo;
     private javax.swing.JTextField coeficiente;
     private javax.swing.JPanel contenedor;
     private javax.swing.JButton derivacion;

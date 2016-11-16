@@ -1,5 +1,7 @@
 package polinomio;
 
+import java.text.DecimalFormat;
+
 public class Polinomio {
     
     private Nodo primero; 
@@ -19,6 +21,11 @@ public class Polinomio {
     }
     
     public void insertarTermino(Termino x) { // Inserta terminos ordenandolos de mayor a menor
+        
+        if(x.getCoeficiente() == 0) { // Si el coeficiente del termino ingresado es 0
+            return;
+        }
+        
         
         Nodo nuevo = new Nodo(x); // Nuevo nodo que contendra el termino
        
@@ -45,23 +52,42 @@ public class Polinomio {
     
     public String mostrarPolinomio() {
         
+        // Formato para que no se visualice cero a la derecha del punto decimal. Ejm.: 3.0 -> 3
+        DecimalFormat formato = new DecimalFormat("0.#");
+        
         Nodo aux = primero; 
         int cont = 0; // para verificar si es el primer termino
         
-        String p = ""; // aqui se guardara la cadena que representa el polinomio
+        String p; // aqui se guardara la cadena que representa el polinomio
+        
+        if(aux == null) { // Si el polinomio no posee terminos
+            p = "0"; // El polinomio es 0
+            
+            return p;
+            
+        } else {
+            p = "";
+        }
         
         while(aux != null) { // mientras haya nodos que recorrer
             if(cont == 0) { // si es el primero
-                p += aux.getDato().getCoeficiente(); // agregar el coeficiente
+                p += formato.format(aux.getDato().getCoeficiente()); // agregar el coeficiente
             } else {
                 if(aux.getDato().getCoeficiente() >= 0) { // si es positivo 
-                    p += "+" + aux.getDato().getCoeficiente(); // agregar el signo '+' más el coeficiente
+                    p += "+" + formato.format(aux.getDato().getCoeficiente()); // agregar el signo '+' más el coeficiente
                 } else {
-                    p += aux.getDato().getCoeficiente(); // agregar el coeficiente
+                    p += formato.format(aux.getDato().getCoeficiente()); // agregar el coeficiente
                 }
             }
             
-            p += "x^" + aux.getDato().getExponente(); // agregar la variable x más el exponente
+            // Si el exponente es diferente de 0. Ya que no es necesario mostrar x⁰
+            if(aux.getDato().getExponente() != 0) {
+                if(aux.getDato().getExponente() == 1) { // Si el exponente es uno no es necesario mostrar x¹
+                    p += "x";
+                } else {
+                    p += "x^" + aux.getDato().getExponente(); // agregar la variable x más el exponente   
+                }
+            }
             
             cont++; // aumentar el contador
             aux = aux.getSiguiente(); //asignamos el nodo siguiente a 'aux'
@@ -118,12 +144,14 @@ public class Polinomio {
         Nodo actual = s.getPrimero(); // Primer nodo del polinomio ingresado
         
         int exponente = actual.getDato().getExponente(); // Exponente del nodo actual
-        int sum = 0; // Suma de los coeficientes de un mismo exponente
+        float sum = 0; // Suma de los coeficientes de un mismo exponente
         
         while(actual != null) { // Mientras haya nodos por recorrer (terminos)
             
             if(actual.getDato().getExponente() != exponente) { // Si el exponente del nodo actual es diferente al que venimos obteniendo
+                
                 suma.insertarTermino(new Termino(sum, exponente)); // Insertamos un nuevo termino que contiene la suma de los terminos del polinomio de un mismo grado
+                
                 exponente = actual.getDato().getExponente(); // Ahora el exponente a evaluar cambia
                 sum = 0; // Nueva suma para los terminos de diferente grado
             }
@@ -134,7 +162,7 @@ public class Polinomio {
         }
         
         suma.insertarTermino(new Termino(sum, exponente)); // Suma para el ultimo termino
-        
+              
         return suma; // Retornamos el polinomio simplificado
     }
     
@@ -145,7 +173,7 @@ public class Polinomio {
         s = Polinomio.simplifica(s); // Simplificamos el polinomio ingresado
         
         // Variables para los nuevos coeficientes y exponentes del polinomio
-        int coeficiente;
+        float coeficiente;
         int exponente;
         
         Nodo actual = s.getPrimero(); // Primer nodo del polinomio ingresado
@@ -162,6 +190,8 @@ public class Polinomio {
             
             actual = actual.getSiguiente();
         }
+        
+        p = simplifica(p);
         
         return p; // Retornamos el polinomio resultante
     }
@@ -206,5 +236,62 @@ public class Polinomio {
         sum = simplifica(sum); // Simpflicamos el polinomio obtenido
         
         return sum; // Retornamose l polinomio resultante
+    }
+    
+    public static Polinomio multiplicacion(Polinomio multiplicando, Polinomio multiplicador) {
+        
+        Polinomio mul = new  Polinomio(); // Nuevo polinomio que contendra el resultado de la multiplicacion
+        
+        multiplicando = simplifica(multiplicando); // Simplificamos el multiplicando
+        
+        multiplicador = simplifica(multiplicador); // Simplificamos el multiplicador
+        
+        // Variables para los productos parciales
+        float coeficiente;
+        int exponente;
+        
+        for(Nodo aux1 = multiplicando.getPrimero(); aux1 != null; aux1 = aux1.getSiguiente()) { // Recorremos todo el multiplicando
+            for(Nodo aux2 = multiplicador.getPrimero(); aux2 != null; aux2 = aux2.getSiguiente()) { // Recorremos todo el multiplicador
+                coeficiente = aux1.getDato().getCoeficiente() * aux2.getDato().getCoeficiente(); // Coeficiente del producto parcial
+                exponente = aux1.getDato().getExponente() + aux2.getDato().getExponente(); // Exponente del producto parcial
+                mul.insertarTermino(new Termino(coeficiente, exponente)); // Insertamos el producto parcial en el nuevo polinomio
+            }
+        }
+        
+        mul = simplifica(mul); // Simplificamos el polinomio multiplicacion
+        
+        return mul; // Retornamos el polinomio
+    }
+    
+    public static Polinomio division(Polinomio dividendo, Polinomio divisor) {
+        
+        Polinomio cociente = new Polinomio(); // Polinomio cociente que contendra el resultado de la division
+        
+        Polinomio aux;  // Polinomio auxiliar que contendra el resultado de cada division parcial
+        Termino termino; // Termino que contendra el coeficiente y exponente de las divisiones parciales
+        
+        // Mientras el dividendo no sea nulo o el grado del dividendo sea mayor igual que el grado del divisor
+        while( dividendo.getPrimero() != null && (dividendo.getPrimero().getDato().getExponente() >= divisor.getPrimero().getDato().getExponente())) {
+            
+            // Coeficiente resultante de la division parcial
+            float coeficiente = dividendo.getPrimero().getDato().getCoeficiente() / divisor.getPrimero().getDato().getCoeficiente();
+            
+            // Exponente resultante de la division parcial
+            int exponente = dividendo.getPrimero().getDato().getExponente() - divisor.getPrimero().getDato().getExponente();
+            
+            termino = new Termino(coeficiente, exponente); // Definimos el termino con los resultados anteriores
+        
+            cociente.insertarTermino(termino); // Insertamos la division parcial al polinomio cociente
+            
+            aux = new Polinomio(); // Inicializamos el polinomio auxiliar
+            
+            aux.insertarTermino(termino); // Polinomio auxiliar sera igual al resultado de la division parcial
+           
+            // El nuevo dividendo sera el resultado de la resta del dividendo actual con la multiplicacion del divisor
+            //  y el resultado de la division parcial
+            dividendo = resta(dividendo, multiplicacion(aux, divisor)); 
+        }
+        
+        return cociente; // Retornamos el polinomio cociente
     }
 }
